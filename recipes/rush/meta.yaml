@@ -1,0 +1,31 @@
+{% set version = "0.5.4" %}
+
+package:
+  name: rush
+  version: {{ version }}
+
+source:
+  url: https://github.com/shenwei356/rush/releases/download/v{{ version }}/rush_darwin_amd64.tar.gz # [osx]
+  md5: f8c8e58dbe6910571cefb594b682e8b7 # [osx]
+
+  url: https://github.com/shenwei356/rush/releases/download/v{{ version }}/rush_linux_amd64.tar.gz # [linux]
+  md5: cea691fa00242728ea01f053420e83d4 # [linux]
+
+build:
+  number: 0
+  run_exports:
+    - {{ pin_subpackage('rush', min_pin='x.x.x', max_pin='x') }}
+
+test:
+  commands:
+    - rush -V
+
+about:
+  home: https://github.com/shenwei356/rush
+  summary: a cross-platform command-line tool for executing jobs in parallel
+  license: MIT
+
+extra:
+  skip-lints:
+    - should_be_noarch_generic
+    - should_not_be_noarch_source
